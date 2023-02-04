@@ -30,7 +30,7 @@ public class CompanyService {
         List<Company> companies2 = companyRepository.findAll().stream().filter(company -> company.getBills().size() != 0).toList();
         List<Company> companiesDontHaveBill = companyRepository.findAll().stream().filter(company -> company.getBills().size() == 0).toList();
         List<Company> companies = companies2.stream().filter(company -> company.getBills().stream().mapToDouble(Bill::getPrice).average().orElseThrow() < 750).toList();
-        List<Company> companies1 = companies.stream().filter(company -> company.getBills().stream().filter(bill -> bill.getCreatedDate().getMonthValue() <6).isParallel()).toList();
+        List<Company> companies1 = companies.stream().filter(company -> company.getBills().stream().filter(bill -> bill.getCreatedDate().getMonthValue() ==6).isParallel()).toList();
         List<Company> company = new ArrayList<>(companiesDontHaveBill);
         company.addAll(companies1);
         return company.stream().map(Company::getSector).toList();
