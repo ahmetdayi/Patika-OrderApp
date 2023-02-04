@@ -1,14 +1,12 @@
 package com.ahmetdayi.patikaorderapp.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@Data
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -20,6 +18,10 @@ public class Company {
 
     private String sector;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE,mappedBy = "company")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE,mappedBy = "company")
     private List<Bill> bills;
+
+    public Company(String sector) {
+        this.sector = sector;
+    }
 }

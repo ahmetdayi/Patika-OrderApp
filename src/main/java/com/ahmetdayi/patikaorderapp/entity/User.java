@@ -1,9 +1,7 @@
 package com.ahmetdayi.patikaorderapp.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 //import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
@@ -11,10 +9,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-@Data
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -28,7 +27,11 @@ public class User {
 
     private String fullName;
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE,mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.MERGE,mappedBy = "user")
     private List<Bill> bills;
 
+    public User(LocalDate createdDate, String fullName) {
+        this.createdDate = createdDate;
+        this.fullName = fullName;
+    }
 }

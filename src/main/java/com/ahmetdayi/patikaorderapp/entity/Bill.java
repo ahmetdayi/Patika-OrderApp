@@ -1,9 +1,7 @@
 package com.ahmetdayi.patikaorderapp.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 //import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDate;
@@ -11,7 +9,7 @@ import java.time.LocalDate;
 //import java.util.Date;
 import java.util.UUID;
 
-@Data
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -28,11 +26,11 @@ public class Bill {
 
     private LocalDate createdDate;
 
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn
     private User user;
 
-    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn
     private Company company;
 
