@@ -4,10 +4,11 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
+//import org.springframework.data.annotation.CreatedDate;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
+
+//import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -22,8 +23,10 @@ public class Bill {
 
     private double price;
 
-    @CreatedDate
-    private Date createdDate;
+//    @CreatedDate aslında bu şekilde yapılabılır ama kendım zaman belırleyebılmek adına degıstırıyorum
+//    private Date createdDate;
+
+    private LocalDate createdDate;
 
     @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn
@@ -33,5 +36,10 @@ public class Bill {
     @JoinColumn
     private Company company;
 
-
+    public Bill(double price, LocalDate createdDate, User user, Company company) {
+        this.price = price;
+        this.createdDate = createdDate;
+        this.user = user;
+        this.company = company;
+    }
 }
