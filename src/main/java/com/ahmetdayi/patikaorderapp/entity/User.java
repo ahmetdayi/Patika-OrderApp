@@ -1,15 +1,14 @@
 package com.ahmetdayi.patikaorderapp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
+//import org.springframework.data.annotation.CreatedDate;
 
-import java.util.Date;
+import java.time.LocalDate;
+//import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -22,9 +21,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @CreatedDate
-    private Date createdTime;
+//    @CreatedDate
+//    private Date createdTime;
+
+    private LocalDate createdDate;
 
     private String fullName;
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE,mappedBy = "user")
+    private List<Bill> bills;
 
 }
